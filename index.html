@@ -1,11 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>聊天机器人-聊天频道</title>
+  <link rel="shortcut icon" href="./asset/favicon.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="./css/common.css" />
+  <link rel="stylesheet" href="./css/index.css" />
 </head>
+
 <body>
-    <h1>hello world！</h1>
+  <div class="container">
+    <div class="main">
+      <h1 class="main-title">
+        <img src="./asset/robot.png" alt="" />
+        AI 聊天机器人
+      </h1>
+      <div class="chat-container">
+        <div class="chat-item me">
+          <img class="chat-avatar" src="./asset/avatar.png" />
+          <div class="chat-content">你几岁啦？</div>
+          <div class="chat-date">2022-04-29 14:18:13</div>
+        </div>
+        <div class="chat-item">
+          <img class="chat-avatar" src="./asset/robot-avatar.jpg" />
+          <div class="chat-content">讨厌，不要随便问女生年龄知道不</div>
+          <div class="chat-date">2022-04-29 14:18:16</div>
+        </div>
+      </div>
+      <form class="msg-container">
+        <input type="text" id="txtMsg" placeholder="在这里输入要发送的消息，按回车键即可发送" />
+        <button>发送</button>
+      </form>
+    </div>
+    <div class="aside">
+      <img src="./asset/avatar.png" class="aside-avatar" alt="" />
+      <p id="nickname" class="aside-name"></p>
+      <p id="loginId" class="aside-account"></p>
+    </div>
+    <div class="close">
+      <i class="iconfont icon-close"></i>
+    </div>
+  </div>
+  <script src="./js/ajax.js"></script>
+  <script src="./js/api.js"></script>
+  <script src="./js/user.js"></script>
+
+  <script>
+
+    (async () => {
+      const userState = await API.profile();
+      if (!userState.data) {
+        alert('登录状态已过期，请重新登录！');
+        location.href = './login.html'
+      }
+      const doms = {
+        closeBtn: document.querySelector('.close'),
+        nickname: document.getElementById('nickname'),
+        loginId: document.getElementById('loginId'),
+        charContainer: document.querySelector('.chat-container')
+      }
+      doms.loginId.innerText = userState.data.loginId;
+      doms.nickname.innerText = userState.data.nickname;
+
+      doms.closeBtn.onclick = () => {
+        localStorage.removeItem('authorization');
+        location.href = './login.html'
+      }
+      //获取当前用户全部聊天记录
+      getMsgAll();
+
+      // 获取全部聊天信息并加载
+      async function getMsgAll() {
+        const resp = await API.getHistory();
+        // updataInfo(resp.data);
+        for (const item of resp.data) {
+          chatInfo(item);
+        }
+      }
+      //发送信息 
+      document.querySelector('button').onclick = async function (e) {
+        e.preventDefault();
+        const msg = document.getElementById('txtMsg').value.trim();
+        if (!msg) return '';
+        //输出发送内容
+        // updataInfo([{
+        //   content: msg,
+        //   createdAt: Date.now(),
+        //   from: "123"
+        // }], 'add');
+        chatInfo({
+          content: msg,
+          createdAt: Date.now(),
+          from: "123"
+        });
+        document.getElementById('txtMsg').value = '';
+        const resp = await API.sendChat(msg);
+        // updataInfo([resp.data], 'add');
+        // chatInfo();
+        chatInfo({
+          to: '123',
+          from: null,
+          ...resp.data
+        });
+      }
+      const createElem = (elemStr) => {
+        return document.createElement(elemStr);
+      }
+      const chatInfo = (chatInfo) => {
+        const div = createElem('div');
+        const img = createElem('img');
+        const content = createElem('div');
+        const date = createElem('div');
+        div.className = 'chat-item';
+        img.className = 'chat-avatar';
+        img.src = chatInfo.from ? './asset/avatar.png' : './asset/robot-avatar.jpg';
+        content.className = 'chat-content';
+        content.innerText = chatInfo.content;
+        date.className = 'chat-date';
+        date.innerText = timestampToDateFormat(chatInfo.createdAt);
+        if (chatInfo.from) {
+          div.classList.add('me');
+        }
+        div.appendChild(img);
+        div.appendChild(content);
+        div.appendChild(date);
+        doms.charContainer.appendChild(div);
+        doms.charContainer.scrollTop = doms.charContainer.scrollHeight;
+      }
+
+      //更新聊天内容
+      function updataInfo(data, type) {
+        // array.filter((_, index) => index % 2 !== 0)
+        const htmlStr = data.map((item, index) => {
+          // if (index % 2 === 0) {
+          if (item.from) {
+            return ` <div class="chat-item me">
+          <img class="chat-avatar" src="./asset/avatar.png" />
+          <div class="chat-content">${item.content}</div>
+          <div class="chat-date">${timestampToDateFormat(item.createdAt)}</div>
+        </div>`
+          } else {
+            return ` <div class="chat-item">
+          <img class="chat-avatar" src="./asset/robot-avatar.jpg" />
+          <div class="chat-content">${item.content}</div>
+          <div class="chat-date">${timestampToDateFormat(item.createdAt)}</div>
+        </div>`
+          }
+
+        }).join('');
+        if (type) {
+          const range = document.createRange();
+          // 使用createContextualFragment方法将HTML字符串转换为文档片段
+          const fragment = range.createContextualFragment(htmlStr);
+          // 将文档片段插入到DOM中
+          doms.charContainer.appendChild(fragment);
+        } else {
+          doms.charContainer.innerHTML = htmlStr;
+        }
+        doms.charContainer.scrollTop = doms.charContainer.scrollHeight;
+      }
+      //时间戳转换成指定格式日期
+      function timestampToDateFormat(timestamp) {
+        const dateObj = new Date(timestamp); // 创建Date对象
+        const year = dateObj.getFullYear(); // 获取年份
+        const month = ("0" + (dateObj.getMonth() + 1)).slice(-2); // 获取月份，并补零
+        const day = ("0" + dateObj.getDate()).slice(-2); // 获取日期，并补零
+
+        const hours = dateObj.getHours().toString().padStart(2, '0');
+        const minutes = dateObj.getMinutes().toString().padStart(2, '0');
+        const seconds = dateObj.getSeconds().toString().padStart(2, '0');
+        return `${year}-${month}-${day} ${hours}-${minutes}-${seconds}`; // 返回转换后的日期格式
+      }
+
+
+    })()
+
+  </script>
 </body>
+
 </html>
