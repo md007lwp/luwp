@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+
+    <script>
+        // const xhr = new XMLHttpRequest();
+        // xhr.onreadystatechange = () => {
+        //     // status 返回状态码
+        //     // readyState 返回阶段：0表示xhr实例已生成、1表示open方法已调用、2表示send方法已调用、3正在接受响应体、4服务器响应已完成
+        //     if (xhr.readyState == 4 && xhr.status === 200) {
+        //         // console.log();
+        //         const resJson = JSON.parse(xhr.responseText);
+        //         if (resJson.code === 0) {
+        //             drawElement(resJson);
+        //         }
+        //     }
+        // }
+        // xhr.open('GET', 'https://study.duyiedu.com/api/citylist'); //配置请求
+        // xhr.send(null);
+
+        // xhr.open('GET', 'https://study.duyiedu.com/api/movies?size=3&page=2'); //配置请求
+        // // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        // // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        // // const param = 'size=3&page=2';
+        // xhr.send(param);
+
+        function drawElement({ data } = { resJson }) {
+            const ul = document.createElement('ul');
+            ul.innerHTML = data.map(item => `<li>${item.label}</li>`).join('');
+            document.querySelector('body').append(ul);
+        }
+
+        // fetch('https://study.duyiedu.com/api/citylist').then(resp => resp.json())
+        //     .then(resp => {
+        //         drawElement(resp);
+        //     })
+
+        try {
+            const resp = fetch('https://study.duyiedu.com/api/citylist');
+            const data = await resp.json();
+            drawElement(data);
+
+        } catch (error) {
+            console.log(p1, error);
+        }
+
+    </script>
+</body>
+
+</html>

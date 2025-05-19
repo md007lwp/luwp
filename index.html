@@ -1,11 +1,366 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+
 <body>
-    <h1>hello world！</h1>
+    <button>1</button><button>2</button><button>3</button><button>4</button><button>5</button><button>6</button><button>7</button><button>8</button><button>9</button><button>10</button>
+    <div>
+        <select name="" class="prov">
+
+        </select>
+    </div>
 </body>
+
+
+<script>
+    // let btns = document.querySelectorAll('button');
+    // for (let index = 0; index < btns.length; index++) {
+    //     btns[index].addEventListener('click', () => {
+    //         console.log(index + 1);
+    //     })
+    // }
+
+    // for (var index = 0; index < btns.length; index++) {
+    //     (function (index) {
+    //         btns[index].addEventListener('click', () => {
+    //             console.log(index + 1);
+    //         })
+    //     })(index)
+
+    // }
+
+
+    // let arr = [], n = 10, m = 100;
+    // for (let i = 0; i < 10; i++) {
+    //     // arr[i] = parseFloat(Math.random().toFixed(3));
+    //     arr[i] = Math.floor(Math.random() * (m - n)) + n;
+    // }
+
+    // let arr = Array(10).fill(0);
+    // for (const itme of arr) {
+    //     itme = parseFloat(Math.random().toFixed(3));
+    // }
+    // arr.forEach((item, index, arr) => {
+    // arr.fill(parseFloat(Math.random().toFixed(3), index));
+    // arr[index] = parseFloat(Math.random().toFixed(3));
+    // })
+    // console.log(arr);
+
+    // let str = "1.gif";
+    // let result = ['.jpg', '.gif', '.png', '.bmp'].some(item => str.endsWith(item));
+
+    // console.log(['.jpg', '.gif', '.png', '.bmp'].includes(str.substring(str.lastIndexOf('.'))));
+
+    // console.log(result);
+
+    // let stus = [{
+    //     id: 101,
+    //     name: "张三",
+    //     sex: "男",
+    //     age: 19,
+    //     tel: 13111111111,
+    //     address: "武汉市花山郡二期5栋103室"
+    // }, {
+    //     id: 102,
+    //     name: "王迪",
+    //     sex: "女",
+    //     age: 25,
+    //     tel: 13122222222,
+    //     address: "北京市西直门136号"
+    // }, {
+    //     id: 103,
+    //     name: "魏王度",
+    //     sex: "男",
+    //     age: 18,
+    //     tel: 13122223333,
+    //     address: "武汉市水果湖芒果街111号"
+    // }, {
+    //     id: 104,
+    //     name: "杰克",
+    //     sex: "男",
+    //     age: 29,
+    //     tel: 13155554444,
+    //     address: "内蒙古锡林郭勒二旗303号"
+    // }, {
+    //     id: 105,
+    //     name: "丽萨",
+    //     sex: "女",
+    //     age: 22,
+    //     tel: 13155556661,
+    //     address: "北京市前门大街歪脖子胡同2号"
+    // }]
+    // stus.forEach(item => console.log(item.name));
+    // console.log(stus.filter(item => item.sex === "女"));
+    // console.log(stus.filter(item => {
+    //     return item.sex === "女" && item.age < 25;
+    // }))
+
+    // console.log(stus.filter(item=>item.name.substr(0,1)==="王"));
+    // console.log(stus.filter(item => item.tel.toString().substr(-1) === '1'));
+    // console.log(stus.filter(item => item.tel.toString().endsWith('1')));
+
+    // console.log(stus.map(item => item.name));
+
+    // console.log(stus.map(item => item.name).join(','));
+    // console.log(stus.reduce((str, cur) => {
+    //     return str += ',' + cur.name;
+    // }, "").substring(1))
+    // console.log(stus.map(item => `<p>${item.name}</p>`).join(''))
+
+    // console.log(stus.reduce(function (total, item) {
+    //     return total += `<p>${item.name}</p>`;
+    // }, ''))
+
+    // console.log(stus.filter(item => item.sex === '女').map(item=>item.name))
+    // let result = "";
+    // result = stus.filter(item => item.sex === "女");
+    // result = stus.filter(item => item.sex === "女").map(item => {
+    //     return { name: item.name, tel: item.tel };
+    // })
+    // console.log(result);
+    // result = stus.reduce((total, item) => {
+    //     return total += item.age;
+    // }, 0) / stus.length;
+    // result = stus.find(item => item.id === "103");
+
+    // result = stus.some(item => item.age > 28);
+
+    // let user = { name: "zs", phone: 12311111111 };
+    // console.log(Object.keys(user));
+    // console.log(Object.values(user));
+    // console.log(Object.entries(user));
+
+    // for (const [key, val] of Object.entries(user)) {
+    //     console.log(`${key}:${val}`)
+    // }
+
+    // function createUser(firstName, lastName) {
+    //     return {
+    //         firstName, lastName, fullName: `${firstName}${lastName}`,
+    //         sayHell() {
+    //             console.log(`我叫:${this.fullName}`);
+    //         }
+    //     }
+    //         ;
+
+    // }
+    // let { fullName, lastName } = createUser("中", "国");
+    // console.log(`我叫:${fullName}`)
+    // console.log(`${lastName}`)
+
+    // let obj = { a: 1, b: 2, c: 3 }
+    // Object.keys(obj).forEach(item => console.log(item))
+    // console.log(...Object.keys(obj));
+    // console.log(...Object.values(obj));
+    // console.log(...Object.entries(obj));
+    // let newObj = Object.fromEntries(Object.entries(obj));
+    // console.log(Object.is(obj, newObj));
+    // let newObj = {};
+    // for (const [key, val] of Object.entries(obj)) {
+    //     newObj[key] = val;
+    // }
+    // console.log(newObj);
+    // console.log(Object.is(obj,newObj));
+    // let objArr = Object.entries(obj);
+    // objArr.shift()
+    // console.log(Object.fromEntries(objArr))
+    // let newObj = {
+    //     ...obj
+    // }
+    // let { a, ...newObj } = obj;
+    // console.log(newObj);
+    // console.log(Object.is(obj, newObj));
+
+    // function createOptions(option) {
+    //     option = option || {};
+    //     defalutOption = { time: 1000, speed: 50, text: "hello word" }
+    //     return {
+    //         ...defalutOption,
+    //         ...option
+    //     }
+    // }
+    // console.log(createOptions());
+    // console.log(createOptions({ time: 100 }));
+    // let user = { name: '钻石', age: 12, phone: 13111111111 }
+    // console.log(Object.getOwnPropertyDescriptors(user))
+    // for (const key of user) {
+    // Object.defineProperty(user, key, {
+    //     get() {
+    //         console.log(`正在读取key属性，值为${val}`);
+    //         return user[key];
+    //     }, set(val) {
+    //         console.log(`正在设置key属性，新的值为${val}`);
+    //         user[key] = val;
+    //     }
+    // })
+    // }
+
+
+    // for (let [key, value] of Object.entries(user)) {
+    //     Object.defineProperty(user, key, {
+    //         get() {
+    //             console.log(`正在读取${key}属性，值为${value}`);
+    //             return value;
+    //         }, set(val) {
+    //             console.log(`正在设置${key}属性，新的值为${value}`);
+    //             value = val;
+    //         }
+    //     })
+    //     console.log(key, value);
+    // }
+    // class Animal {
+    //     constructor(name, ...hobby) {
+    //         this.name = name
+    //         this.hobby = hobby;
+    //     }
+    //     seyHello() {
+    //         console.log(this.name, this.hobby, this.age);
+    //     }
+    // }
+
+    // class Dog extends Animal {
+    //     constructor(name, age, ...hobby) {
+    //         super(name, ...hobby);
+    //         this.age = age;
+    //     }
+    // }
+
+    // let wc = new Dog('旺财', 3, '睡觉', '抓老鼠');
+    // wc.hobby.push('守门');
+    // let xq = new Dog('小强', 10, '吃饭');
+    // // console.log(wc);
+    // console.log(wc.seyHello());
+    // console.log(xq.seyHello());
+
+    // const sum = (...nums) => {
+    //     let result = nums.length || 0;
+    //     if (result) {
+    //         return nums.reduce((cur, val) => cur + val, 0);
+    //     } else {
+    //         return result;
+    //     }
+    // }
+    // console.log(sum());
+    // console.log(sum(1));
+    // console.log(sum(1, 2));
+    // console.log(sum(1, 2, 3));
+    // const arr = [1, 2, 3, 4, 5, 6];
+    // console.log(sum(...arr));
+
+    // const counter = {
+    //     count: 0,
+    //     startIncrease() {
+    //         setInterval(() => {
+    //             // counter.count++;
+    //             //箭头函数内没有this,当前this指的是其外层的this
+    //             this.count++;
+    //             console.log(counter.count);
+    //         }, 1000)
+    //     }
+    // }
+
+    //当传入参数为不确定属性组成配置对象时,可以采取解构对象来实现默认值
+    // const getData = ({ page = 1, num = 10, keyWord = '' } = {}) => {
+    //     console.log(`${page}-${num}-${keyWord ? keyWord : '空'}`);
+    // }
+    // getData();//当参数为空时，默认赋值为空对象，对空对象进行解构，再给其填充默认属性赋值
+    // getData({ page: 1 });
+    // getData({ page: 1, num: 10 });
+    // getData({ page: 1, num: 10, keyWord: '电视' });
+
+    //类语法练习
+    // class User {
+    //     constructor(name, pwd) {
+    //         this.name = name;
+    //         this.pwd = pwd;
+    //     }
+    //     sayHello() {
+    //         console.log(`${this.name}-${this.pwd}`);
+    //     }
+    // }
+    // let u1 = new User('zs', '123');
+    // u1.sayHello();
+
+    // 函数防抖
+    //当用不希望某一行为被频繁触发，而是在其行为停顿或结束后触发
+    // const debounce = (fn, thime = 1000) => {
+    //     let tid;
+    //     return (...args) => {
+    //         clearTimeout(tid);
+    //         tid = setTimeout(() => {
+    //             fn(...args);
+    //         }, 1000);
+    //     }
+    // }
+    // let fn = (a = 1, b = 2) => { console.log(a + b) }
+    // let dfn = debounce(fn);
+    // let btns = document.querySelectorAll('button');
+    // btns[0].onclick = function (e) {
+    //     dfn();
+    // };
+
+
+    //一个延迟函数
+    // function delay(duration) {
+    //     return new Promise((resolve, rejcet) => {
+    //         setTimeout(() => {
+    //             if (Math.floor(Math.random() > 0.3)) {
+    //                 resolve('执行成功！');
+    //             } else {
+    //                 rejcet('执行失败！');
+    //             }
+    //         }, duration);
+    //     })
+    // }
+    // delay(1000).then((reply) => {
+    //     console.log(reply);
+    // }, (reply) => {
+    //     console.log(reply);
+    // });
+
+    //练习Promise  加载一张图片（异步），当加载成功就将图片展示到页面上，失败则输出失败原因
+    // function createImg(url) {
+    //     return new Promise((resolve, rejcet) => {
+    //         let img = document.createElement('img');
+    //         img.src = url;
+    //         img.onload = () => {
+    //             resolve(img);
+    //         }
+    //         img.onerror = (err) => {
+    //             rejcet(err)
+    //         }
+    //     })
+    // }
+    // let body = document.querySelector('body')
+    // let imgUrl = "https://pics6.baidu.com/feed/9213b07eca8065387f2cbeef658a754baf3482eb.jpeg@f_auto?token=696ca87369cfbad3911cd17cd9d07856";
+    // createImg(imgUrl).then(img => {
+    //     body.append(img);
+    // }, err => {
+    //     console.log(err);
+    // })
+    //练习 远程加载省份数据，返回一个promise
+    // function getProvinces() {
+    //     return fetch('https://study.duyiedu.com/api/citylist')
+    //         .then(resp => resp.json())
+    //         .then(reps => reps.data)
+    //         .then(resp => resp.map(item => ({ value: item.value, label: item.label }))
+    //         );
+    // }
+    // 由于是promise,所以可以通过then来处理成功或失败后的处理
+    // getProvinces().then(provArr => {
+    //     let provSel = document.querySelector('.prov')
+    //     provSel.innerHTML = provArr.reduce((optStr, item) => optStr + `<option value='${item.value}'>${item.label}</option>`, `<option value='-1'>请选择</option>`);
+    // }, reason => {
+    //     console.log(reason);
+    // })
+
+    
+</script>
+<script src="./test.js"></script>
+
 </html>
